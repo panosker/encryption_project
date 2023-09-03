@@ -1,0 +1,17 @@
+{% extends 'login/main.html' %}
+
+{% block content %}
+<div class="container2">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <small><a href="{% url 'password_reset' %}">Forgot password?</a></small><br>
+        <small><a href="{% url 'register' %}">Register</a></small><br>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+
+<div class="container3">
+    <p>    Do you want to try our webpage with limited requests? click <a href="{% url 'index' %}">Here</a></p>
+</div>
+{% endblock %}

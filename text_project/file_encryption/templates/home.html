@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body" style="color:black;">
+                <h1>Upload File for Encryption</h1>
+                    <h5>*Try only '.txt' files</h5>
+
+                {% if not download_link_encr %}
+                    {% if not request.FILES %}
+                        <p>Please select a file to encrypt.</p>
+                        <form action="{% url 'file-encrypt' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <input type="file" name="file">
+
+                            <input type="submit" value="Upload">
+                        </form>
+                    {% endif %}
+                {% else %}
+                    <p>File encrypted successfully!</p>
+                    <p><a href="{{ download_link_encr }}">Download Encrypted File</a></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body" style="color:black;">
+                <h1>Upload File for Decryption</h1>
+                <h5>*Try only '.txt' files</h5>
+
+                {% if not download_link_decr %}
+                    {% if not request.FILES %}
+                        <p>Please select a file to decrypt.</p>
+                        <form action="{% url 'file-decrypt' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <input type="file" name="file">
+
+                            <input type="submit" value="Upload">
+                        </form>
+                    {% endif %}
+                {% else %}
+                    <p>File decrypted successfully!</p>
+                    <p><a href="{{ download_link_decr }}">Download Decrypted File</a></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

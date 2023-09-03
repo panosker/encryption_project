@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Choose an Action</h5>
+                <form method="post" action="{% url 'action' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        
+                        <select class="form-control" name="action">
+                            <option value="encrypt">Encrypt</option>
+                            <option value="decrypt">Decrypt</option>
+                        </select><br>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Select</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        {% if selected_action == 'encrypt' %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Encryption</h5>
+                <form method="post" action="{% url 'encrypted' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="text" class="form-label">Place your text you want to encrypt:</label>
+                        <textarea class="form-control" name="text" rows="5" cols="50"
+                            placeholder="Enter a text to encrypt">{{ text }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Encrypt</button>
+                </form>
+                {% if encrypted_text %}
+                <div class="mb-3">
+                    <h2>Encrypted Text:</h2>
+                    <textarea class="form-control" name="text" rows="5" cols="50"
+                        readonly>{{ encrypted_text }}</textarea>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% elif selected_action == 'decrypt' %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Decryption</h5>
+                <form method="post" action="{% url 'decrypted' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="text" class="form-label">Text:</label>
+                        <textarea class="form-control" name="text" rows="5" cols="50"
+                            placeholder="Enter a text to decrypt .">{{ encrypted_text }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Decrypt</button>
+                </form>
+                {% if decrypted_text %}
+                <div class="mb-3">
+                    <h2>Decrypted Text:</h2>
+                    <textarea class="form-control" name="text" rows="5" cols="50"
+                        readonly>{{ decrypted_text }}</textarea>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<br>
+<hr>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box">
+                <h3>Encryption</h3>
+                <h5>What is Encryption?</h5>
+                <p>
+                    In cryptography, encryption is the process of encoding information. 
+                    This process converts the original representation of the information, 
+                    known as plaintext, into an alternative form known as ciphertext.
+                    Ideally, only authorized parties can decipher a ciphertext back to plaintext and access the original information.
+                    Encryption does not itself prevent interference but denies the intelligible content to a would-be interceptor.
+                </p>
+                <h5>How to use:</h5>
+                <p>
+                <ol>
+                    <li>
+                        Choose an action.<strong>Encrypt</strong> to encrypt your data.
+                    </li>
+                    <li>
+                        Press <strong>Select</strong>
+                    </li>
+                    <li>
+                        Place the data you want to encrypt.The data can be everything
+                        from <strong>URLs</strong> to text <strong>messages</strong>
+                    </li>
+                    <li>
+                        Press <strong>Encrypt</strong>
+                    </li>
+                    <small> <strong>Congratulations</strong> your data is encrypted</small>
+                </ol>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box">
+                <h3>Decryption</h3>
+                <h5>What is Decryption?</h5>
+                <p>
+                    The conversion of encrypted data into its original form is called Decryption.
+                    It is generally a reverse process of encryption. It decodes the encrypted 
+                    information so that an authorized user can only decrypt the data because 
+                    decryption requires a secret key or password.
+                </p>
+                <h5>How to use:</h5>
+                <p>
+                <ol>
+                    <li>
+                        Choose an action.<strong>Decrypt</strong> to decrypt your encrypted data.
+                    </li>
+                    <li>
+                        Press <strong>Select</strong>.
+                    </li>
+                    <li>
+                        Place the data you previously encrypted.
+                    </li>
+                    <li>
+                        Press <strong>Decrypt</strong>.
+                    </li>
+                    <small> <strong>Congratulations</strong> you have successfully decrypted your data</small>
+                </ol>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

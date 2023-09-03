@@ -1,0 +1,12 @@
+{% extends 'login/main.html' %}
+
+{% block content %}
+<div class="container2">
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <small>Already registered? Back to <a href="{% url 'login' %}">login</a> page</small><br>
+    <button type="submit" class="btn btn-primary">Confirm</button>
+    
+</form></div>
+{% endblock %}
