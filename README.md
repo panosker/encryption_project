@@ -19,8 +19,8 @@ Commands:
 2. username = admin / password= password
 
 ## Description
-    The whole project was built by keeping in mind that i can extend the abilities
-    of django framework by adding my own login (in this case is the encryption.py).
+    The whole project was built having in mind that I can extend the abilities
+    of django framework by adding my own logic(in this case is the encryption.py).
     
 
 
