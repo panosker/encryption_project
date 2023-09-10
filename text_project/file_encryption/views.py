@@ -34,9 +34,9 @@ def file_encrypt_view(request):
             'download_link_encr': download_link_encr,
         }
 
-        return render(request, 'home.html', context)
+        return render(request, 'file_encryption/home.html', context)
 
-    return render(request, 'home.html')
+    return render(request, 'file_encryption/home.html')
 
 @new_rates(non_registered_rate='10/m', registered_rate='50/m')
 def file_decrypt_view(request):
@@ -49,6 +49,6 @@ def file_decrypt_view(request):
             'download_link_decr': download_link_decr,
         }
 
-        return render(request, 'home.html', context)
+        return render(request, 'file_encryption/home.html', context)
 
-    return render(request, 'home.html')
+    return render(request, 'file_encryption/home.html')
